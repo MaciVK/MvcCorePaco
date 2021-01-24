@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MvcCorePaco.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Crear Alumno</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idalumno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nota)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">
+                    @Html.DisplayFor(modelItem => item.idalumno)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nota)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", "Alumnos", new { idalumno = item.idalumno }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Editar", "Edit", new { idalumno=item.idalumno }, new { @class="btn btn-warning"}) |
+                    @Html.ActionLink("Eliminar", "Delete", "Alumnos", new { idalumno = item.idalumno }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
