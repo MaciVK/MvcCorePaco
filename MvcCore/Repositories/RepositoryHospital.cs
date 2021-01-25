@@ -14,12 +14,6 @@ namespace MvcCorePaco.Repositories
         {
             this.context = context;
         }
-        #region TABLA EMPLEADOS
-        public List<Empleado> GetEmpleados()
-        {
-            return this.context.Empleados.ToList();
-        }
-        #endregion
         #region TABLA DEPARTAMENTOS
         public List<Departamento> GetDepartamentos()
         {
@@ -59,6 +53,21 @@ namespace MvcCorePaco.Repositories
             dept.Localidad = loc;
             this.context.SaveChanges();
         }
+
+        #endregion
+        #region TABLA EMPLEADOS
+        public List<Empleado> GetEmpleados()
+        {
+            return this.context.Empleados.ToList();
+        }
+        public List<Empleado> GetEmpleadosDepartamentos(List<int> iddepts)
+        {
+            var consulta = from empleados in this.context.Empleados
+                           where iddepts.Contains(empleados.NumDept)
+                           select empleados;
+            return consulta.ToList();
+        }
+        
         #endregion
     }
 }

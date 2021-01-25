@@ -55,5 +55,13 @@ namespace MvcCorePaco.Controllers
             ViewBag.Departamentos = depts;
             return View(emps);
         }
+        [HttpPost]
+        public IActionResult SeleccionMultiple(List<int> iddepts)
+        {
+            List<Departamento> depts = this.repo.GetDepartamentos();
+            List<Empleado> empleados = this.repo.GetEmpleadosDepartamentos(iddepts);
+            ViewBag.Departamentos = depts;
+            return View(empleados);
+        }
     }
 }

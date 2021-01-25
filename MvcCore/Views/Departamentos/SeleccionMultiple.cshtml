@@ -17,14 +17,12 @@
         @foreach (Departamento dep in departs)
         {
             <li class="list-group-item">
-                <input type="checkbox" name="iddepartamentos" class="form-check-inline" value="@dep.IdDepartamento" />
+                <input type="checkbox" name="iddepts" class="form-check-inline" value="@dep.IdDepartamento" />
                 @dep.Nombre
             </li>
         }
     </ul>
-        <button type="submit" class="btn btn-success my-1">Mostrar Empleados</button>
-
-
+    <button type="submit" class="btn btn-success my-1">Mostrar Empleados</button>
 </form>
 @if (Model != null)
 {

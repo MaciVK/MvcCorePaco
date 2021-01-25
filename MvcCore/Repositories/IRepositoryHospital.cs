@@ -9,5 +9,6 @@ namespace MvcCorePaco.Repositories
     public interface IRepositoryHospital : IRepositoryDepartamentos
     {
         List<Empleado> GetEmpleados();
+        List<Empleado> GetEmpleadosDepartamentos(List<int> iddepts);
     }
 }
