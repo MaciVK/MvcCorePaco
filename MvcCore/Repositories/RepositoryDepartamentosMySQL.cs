@@ -12,33 +12,40 @@ namespace MvcCorePaco.Repositories
 
     {
         DepartamentosContext context;
-       
+
         public RepositoryDepartamentosMySQL(DepartamentosContext context)
         {
             this.context = context;
-            
+
         }
         public void CreateDepartamento(int iddepart, string nombre, string loc)
         {
-            throw new NotImplementedException();
+            Departamento dep = new Departamento();
+            dep.IdDepartamento = iddepart;
+            dep.Nombre = nombre;
+            dep.Localidad = loc;
+            this.context.Add(dep);
+            this.context.SaveChanges();
         }
 
         public void DeleteDepartamento(int iddepart)
         {
-            throw new NotImplementedException();
+            Departamento dep = this.GetDepartamento(iddepart);
+            this.context.Departamentos.Remove(dep);
+            this.context.SaveChanges();
         }
 
         public void EditDepartamento(int iddepart, string nombre, string loc)
         {
-            throw new NotImplementedException();
+            Departamento dep = this.GetDepartamento(iddepart);
+            dep.Nombre = nombre;
+            dep.Localidad = loc;
+            this.context.SaveChanges();
         }
 
         public Departamento GetDepartamento(int iddepart)
         {
-            var consulta = from dept in this.context.Departamentos
-                           where dept.IdDepartamento == iddepart
-                           select dept;
-            return consulta.FirstOrDefault();
+            return this.context.Departamentos.Where(x => x.IdDepartamento == iddepart).FirstOrDefault();
         }
 
         public List<Departamento> GetDepartamentos()

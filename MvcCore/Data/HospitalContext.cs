@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MvcCorePaco.Data
 {
-    public class DepartamentosContext : DbContext
+    public class HospitalContext : DbContext
     {
-        public DepartamentosContext(DbContextOptions<DepartamentosContext> options) : base(options) { }
-
+        public HospitalContext(DbContextOptions<HospitalContext> options) : base(options) { }
+        public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
     }
 }

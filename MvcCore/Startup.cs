@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySQL.Data;
 using MvcCorePaco.Data;
 using MvcCorePaco.Helpers;
 using MvcCorePaco.Repositories;
+
 
 namespace MvcCore
 {
@@ -28,16 +28,21 @@ namespace MvcCore
         public void ConfigureServices(IServiceCollection services)
         {
             String cadenaSQL = Configuration.GetConnectionString("CadenaSqlHospitalCasa");
+            string cadenaSQLClase = Configuration.GetConnectionString("CadenaSqlHospitalClase");
             string cadenaOracle = Configuration.GetConnectionString("CadenaOracleDeptCasa");
             string cadenaMySQL = Configuration.GetConnectionString("CadenaMySQLHospital");
             services.AddTransient<PathProvider>();
             services.AddTransient<RepositoryJoyerias>();
             services.AddTransient<RepositoryAlumnos>();
-            // services.AddTransient<IRepositoryDepartamentos, RepositoryDepartamentosSQL>();
+            //SQL SERVER
+            services.AddTransient<IRepositoryHospital, RepositoryHospital>();
+            services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQLClase));
+            //ORACLE DB
             //services.AddTransient<IRepositoryDepartamentos>(x => new RepositoryDepartamentosOracle(cadenaOracle));
-            services.AddDbContext<DepartamentosContext>(options => options.UseMySQL(cadenaMySQL));
-            services.AddTransient<IRepositoryDepartamentos, RepositoryDepartamentosMySQL>();
-            //services.AddDbContext<DepartamentosContext>(options => options.UseSqlServer(cadenaSQL));
+            //MYSQL CON POMELO
+            //services.AddDbContextPool<DepartamentosContext>(options => options.UseMySql(cadenaMySQL, ServerVersion.AutoDetect(cadenaMySQL)));
+            //services.AddTransient<IRepositoryDepartamentos, RepositoryDepartamentosMySQL>();
+
             services.AddControllersWithViews();
 
         }

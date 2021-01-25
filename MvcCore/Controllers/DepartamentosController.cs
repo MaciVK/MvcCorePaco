@@ -10,8 +10,8 @@ namespace MvcCorePaco.Controllers
 {
     public class DepartamentosController : Controller
     {
-        IRepositoryDepartamentos repo;
-        public DepartamentosController(IRepositoryDepartamentos repo)
+        IRepositoryHospital repo;
+        public DepartamentosController(IRepositoryHospital repo)
         {
             this.repo = repo;
         }
@@ -47,6 +47,13 @@ namespace MvcCorePaco.Controllers
         {
             this.repo.EditDepartamento(dep.IdDepartamento, dep.Nombre, dep.Localidad);
             return RedirectToAction("Index");
+        }
+        public IActionResult SeleccionMultiple()
+        {
+            List<Departamento> depts = this.repo.GetDepartamentos();
+            List<Empleado> emps = this.repo.GetEmpleados();
+            ViewBag.Departamentos = depts;
+            return View(emps);
         }
     }
 }
