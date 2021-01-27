@@ -28,6 +28,11 @@ namespace MvcCorePaco.Repositories
             this.context.SaveChanges();
         }
 
+        public void CreateDepartamento(int iddepart, string nombre, string loc, string imagen)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteDepartamento(int iddepart)
         {
             Departamento dep = this.GetDepartamento(iddepart);

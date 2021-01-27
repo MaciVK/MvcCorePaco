@@ -1,0 +1,11 @@
+﻿@{
+}
+<h1>Ejemplo File Uploading</h1>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="fichero" class="form-control-sm"/>
+    <button type="submit" class="btn btn-outline-success">Subir Fichero</button>
+</form>
+@if (ViewBag.Mensaje != null)
+{
+<p class="text-success">@ViewBag.Mensaje </p>
+}

@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MvcCorePaco.Helpers;
 using MvcCorePaco.Models;
 using MvcCorePaco.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,9 +14,12 @@ namespace MvcCorePaco.Controllers
     public class DepartamentosController : Controller
     {
         IRepositoryHospital repo;
-        public DepartamentosController(IRepositoryHospital repo)
+        PathProvider pathprovider;
+        public DepartamentosController(IRepositoryHospital repo, PathProvider pathprovider)
         {
             this.repo = repo;
+            this.pathprovider = pathprovider;
+
         }
         public IActionResult Index()
         {
@@ -33,9 +39,15 @@ namespace MvcCorePaco.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Departamento dep)
+        public async Task<IActionResult> Create(Departamento dep,IFormFile ficheroimagen)
         {
-            this.repo.CreateDepartamento(dep.IdDepartamento, dep.Nombre, dep.Localidad);
+            string filename = ficheroimagen.FileName;
+            string path = pathprovider.MapPath(filename, Folders.Images);
+            using (var stream=new FileStream(path, FileMode.Create))
+            {
+                await ficheroimagen.CopyToAsync(stream);
+            }
+            this.repo.CreateDepartamento(dep.IdDepartamento, dep.Nombre, dep.Localidad, filename);
             return RedirectToAction("Index");
         }
         public IActionResult Edit(int iddepart)

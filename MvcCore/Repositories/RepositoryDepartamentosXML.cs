@@ -76,5 +76,9 @@ namespace MvcCorePaco.Repositories
             this.docxml.Save(this.path);
         }
 
+        public void CreateDepartamento(int iddepart, string nombre, string loc, string imagen)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

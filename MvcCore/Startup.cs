@@ -31,13 +31,17 @@ namespace MvcCore
             string cadenaSQLClase = Configuration.GetConnectionString("CadenaSqlHospitalClase");
             string cadenaOracle = Configuration.GetConnectionString("CadenaOracleDeptCasa");
             string cadenaMySQL = Configuration.GetConnectionString("CadenaMySQLHospital");
+
             services.AddSingleton<IConfiguration>(this.Configuration);
+
+            string azureSQL = Configuration.GetConnectionString("AzureSQL");
+
             services.AddTransient<PathProvider>();
             services.AddTransient<RepositoryJoyerias>();
             services.AddTransient<RepositoryAlumnos>();
             //SQL SERVER
             services.AddTransient<IRepositoryHospital, RepositoryHospital>();
-            services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQLClase));
+            services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQL));
             //ORACLE DB
             //services.AddTransient<IRepositoryDepartamentos>(x => new RepositoryDepartamentosOracle(cadenaOracle));
             //MYSQL CON POMELO

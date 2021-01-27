@@ -58,16 +58,29 @@ namespace MvcCorePaco.Repositories
         #region TABLA EMPLEADOS
         public List<Empleado> GetEmpleados()
         {
-            return this.context.Empleados.ToList();
+            return this.context.Empleados.OrderBy(emp => emp.NumDept).ToList();
         }
         public List<Empleado> GetEmpleadosDepartamentos(List<int> iddepts)
         {
             var consulta = from empleados in this.context.Empleados
                            where iddepts.Contains(empleados.NumDept)
+                           orderby empleados.NumDept
                            select empleados;
             return consulta.ToList();
         }
-        
+
+        public void CreateDepartamento(int iddepart, string nombre, string loc, string imagen)
+        {
+            Departamento dep = new Departamento();
+            dep.IdDepartamento = iddepart;
+            dep.Nombre = nombre;
+            dep.Localidad = loc;
+            dep.Imagen = imagen;
+            this.context.Departamentos.Add(dep);
+            this.context.SaveChanges();
+
+        }
+
         #endregion
     }
 }
