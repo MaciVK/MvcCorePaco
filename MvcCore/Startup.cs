@@ -31,7 +31,11 @@ namespace MvcCore
             string cadenaSQLClase = Configuration.GetConnectionString("CadenaSqlHospitalClase");
             string cadenaOracle = Configuration.GetConnectionString("CadenaOracleDeptCasa");
             string cadenaMySQL = Configuration.GetConnectionString("CadenaMySQLHospital");
+
+            services.AddSingleton<IConfiguration>(this.Configuration);
+
             string azureSQL = Configuration.GetConnectionString("AzureSQL");
+
             services.AddTransient<PathProvider>();
             services.AddTransient<RepositoryJoyerias>();
             services.AddTransient<RepositoryAlumnos>();
