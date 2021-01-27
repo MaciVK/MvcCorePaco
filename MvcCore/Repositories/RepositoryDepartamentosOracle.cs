@@ -86,5 +86,10 @@ namespace MvcCorePaco.Repositories
             return consulta.ToList();
 
         }
+
+        public void CreateDepartamento(int iddepart, string nombre, string loc, string imagen)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

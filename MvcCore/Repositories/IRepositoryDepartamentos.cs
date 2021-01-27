@@ -13,5 +13,6 @@ namespace MvcCorePaco.Repositories
         void DeleteDepartamento(int iddepart);
         void CreateDepartamento(int iddepart, string nombre, string loc);
         void EditDepartamento(int iddepart, string nombre, string loc);
+        void CreateDepartamento(int iddepart, string nombre, string loc, string imagen);
     }
 }

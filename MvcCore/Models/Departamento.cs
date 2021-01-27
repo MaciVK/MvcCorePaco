@@ -18,5 +18,7 @@ namespace MvcCorePaco.Models
         public string Nombre { get; set; }
         [Column("LOC")]
         public string Localidad { get; set; }
+        [Column("IMAGEN")]
+        public string Imagen { get; set; }
     }
 }

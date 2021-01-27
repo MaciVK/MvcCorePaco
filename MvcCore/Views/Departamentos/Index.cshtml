@@ -10,8 +10,8 @@
     <a asp-action="Create" class="btn btn-success">Crear Departamento</a>
     <a asp-action="SeleccionMultiple" class="btn btn-info">Seleccion Multiple Departamentos</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IdDepartamento)
@@ -23,15 +23,16 @@
                 @Html.DisplayNameFor(model => model.Localidad)
             </th>
             <th></th>
+            <th>Imagen</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <th scope="row">
                     @Html.DisplayFor(modelItem => item.IdDepartamento)
-                </td>
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
@@ -42,6 +43,14 @@
                     @Html.ActionLink("Detalles", "Details", new { iddepart=item.IdDepartamento }, new {@class="btn btn-info" }) |
                     @Html.ActionLink("Editar", "Edit", new {iddepart=item.IdDepartamento}, new { @class = "btn btn-warning" }) |
                     @Html.ActionLink("Eliminar", "Delete", new { iddepart=item.IdDepartamento }, new { @class = "btn btn-danger" })
+                </td>
+                <td>
+                    @* UN BUEN HELPER PUEDE SER UNO CON UN ARRAY DE SIMBOLOS, PARA SANEAR LOS
+                        NOMBRES DE LOS ARCHIVOS.
+                        CHAR.IsSymbol,
+                        CHAR.IsWhiteSpace
+                        *@
+                    <img src="~/images/@item.Imagen" class="img-thumbnail" style="height:200px;width:200px;"/>
                 </td>
             </tr>
         }

@@ -10,5 +10,6 @@ namespace MvcCorePaco.Repositories
     {
         List<Empleado> GetEmpleados();
         List<Empleado> GetEmpleadosDepartamentos(List<int> iddepts);
+
     }
 }
