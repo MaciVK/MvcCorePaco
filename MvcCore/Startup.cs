@@ -39,6 +39,7 @@ namespace MvcCore
             services.AddSingleton<PathProvider>();
             services.AddTransient<RepositoryJoyerias>();
             services.AddTransient<RepositoryAlumnos>();
+            services.AddTransient<RepositoryUsuarios>();
             //SQL SERVER
             services.AddTransient<IRepositoryHospital, RepositoryHospital>();
             services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQL));

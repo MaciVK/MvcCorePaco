@@ -1,0 +1,17 @@
+﻿@model Usuario
+<h1>Credenciales Usuario // Inicio de Sesión</h1>
+<form method="post">
+    <label>Nombre usuario</label>
+    <input type="text" name="username" class="form-control" />
+    <label>Contraseña</label>
+    <input type="text" name="pass" class="form-control" />
+    <button type="submit" class="btn btn-success my-1">Iniciar Sesion</button>
+</form>
+@if (Model != null)
+{
+    <h1 class='text-success'>BIENVENIDO, @Model.Nombre!!</h1>
+}
+else
+{
+    @Html.Raw(ViewBag.NotSuccess)
+}

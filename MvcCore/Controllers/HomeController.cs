@@ -83,27 +83,12 @@ namespace MvcCore.Controllers
         [HttpPost]
         public IActionResult CifradoHash(string contenido, string resultado, string accion)
         {
-            //TENEMOS QUE TRABAJAR A NIVEL DE Byte[]
-            //CONVERTIMOS A byte[] EL CONTENIDO DE ENTRADA
-            byte[] entrada;
-            //EL CIFRADO SE HACE A NIVEL DE byte[] Y DEVUELVE OTRO byte[] DE SALIDA
-            byte[] salida;
-            //NECESITAMOS UN CONVERSOR PARA TRANSFORMAR DE byte[] A STRING Y VICEVERSA
-            UnicodeEncoding encoding = new UnicodeEncoding();
-            //NECESITAMOS EL OBJETO QUE SE ENCARGA DE CIFRAR
-            SHA1Managed sha = new SHA1Managed();
-            //HAY QUE CONVERTIR EL CONTENIDO DE ENTRADA A byte[]
-            entrada = encoding.GetBytes(contenido);
-            //EL OBJETO SHA1Managed TIENE UN METODO PARA DEVOLVER LOS BYTES DE SALIDA REALIZANDO EL CIFRADO
-            salida = sha.ComputeHash(entrada);
-            string res = encoding.GetString(salida);
-            //SOLAMENTE SI PONEMOS EL MISMO contenido TENDRÍAMOS LA MISMA SECUENCIA DE SALIDA
-
+            string res = CypherService.CifradoSHA1(contenido);
             if (accion.ToLower() == "cifrar")
             {
                 ViewBag.Resultado = res;
             }
-            else if(accion.ToLower()=="comparar")
+            else if (accion.ToLower() == "comparar")
             {
                 //EN ESTE CASO COMPARAMOS LA CAJA resultado CON EL DATO YA CIFRADO DE NUEVO (res)
                 if (resultado != res)
@@ -115,6 +100,34 @@ namespace MvcCore.Controllers
                     ViewBag.Mensaje = "<h1 class='text-success'>Coincide!!</h1>";
                 }
 
+            }
+
+            return View();
+        }
+        public IActionResult CifradoHashEficiente()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public IActionResult CifradoHashEficiente(string contenido, int iteraciones, string salt, string resultado, string action)
+        {
+            String cifrado = CypherService.CifradoSaltSHA256(contenido, iteraciones, salt);
+            if (action.ToLower() == "cifrar")
+            {
+                ViewBag.Resultado = cifrado;
+            }
+            else if (action.ToLower() == "comparar")
+            {
+                if (resultado == cifrado)
+                {
+;
+                    ViewBag.Mensaje = "<h1 class='text-success'>Son iguales!</h1>";
+                }
+                else
+                {
+                    ViewBag.Mensaje = "<h1 class='text-danger'>NO COINCIDEN!</h1>";
+                }
             }
             return View();
         }

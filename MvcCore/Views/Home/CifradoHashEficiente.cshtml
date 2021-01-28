@@ -1,0 +1,14 @@
+﻿<h1>Cifrado hash eficiente</h1>
+<form method="post">
+    <label>Iteraciones:</label>
+    <input type="number" name="iteraciones" class="form-control" />
+    <label>Salt:</label>
+    <input type="text" name="salt" class="form-control" />
+    <label>Contenido a cifrar:</label>
+    <input type="text" name="contenido" class="form-control" />
+    <textarea rows="5" cols="20" class="form-control-plaintext" name="resultado" >@ViewBag.Resultado</textarea>
+    <button type="submit" class="btn btn-success my-1" name="action" value="cifrar">Cifrar</button>
+    <button type="submit" class="btn btn-warning my-1" name="action" value="comparar">Comparar</button>
+</form>
+@Html.Raw(ViewBag.Mensaje)
+<p class="form-control-plaintext" readonly >@ViewBag.Resultado</p>

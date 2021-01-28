@@ -25,5 +25,28 @@ namespace MvcCorePaco.Helpers
             }
             return Path;
         }
+        public static string NormalizeName(string namearchivo)
+        {
+            if (namearchivo.Length > 0)
+            {
+
+                string extension = namearchivo.Substring(namearchivo.LastIndexOf("."));
+                string nombre = namearchivo.Remove(namearchivo.LastIndexOf("."));
+                string final = "";
+                for (int i = 0; i < nombre.Length; i++)
+                {
+                    if (!Char.IsSymbol(nombre[i]) && !Char.IsWhiteSpace(nombre[i]) &&
+                        !Char.IsPunctuation(nombre[i]) && !Char.IsSeparator(nombre[i]))
+                    {
+                        final += nombre[i];
+                    }
+                }
+                return final + extension;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
