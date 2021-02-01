@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.Extensions.Configuration;
-
-
+using MvcCorePaco.Extensions;
 using MvcCorePaco.Helpers;
+using MvcCorePaco.Models;
 
 namespace MvcCore.Controllers
 {
@@ -121,7 +121,7 @@ namespace MvcCore.Controllers
             {
                 if (resultado == cifrado)
                 {
-;
+                    ;
                     ViewBag.Mensaje = "<h1 class='text-success'>Son iguales!</h1>";
                 }
                 else
@@ -131,5 +131,59 @@ namespace MvcCore.Controllers
             }
             return View();
         }
+        public IActionResult EjemploSession(string accion)
+        {
+            if (accion == "almacenar")
+            {
+                Persona person = new Persona();
+                person.Nombre = "Paco";
+                person.Edad = 40;
+                person.Hora = DateTime.Now.ToLongTimeString();
+
+                HttpContext.Session.SetString("Persona", HelperToolkit.SerializeObject(person));
+
+                //HttpContext.Session.SetString("Autor", "Programator");
+                //HttpContext.Session.SetString("Hora", DateTime.Now.ToLongTimeString());
+                ViewBag.Mensaje = "Datos almacenados en Session a las " + DateTime.Now.ToLongTimeString();
+            }
+            else if (accion == "mostrar")
+            {
+
+                Persona person = HelperToolkit.DeserializeJSONObject<Persona>(HttpContext.Session.GetString("Persona"));
+
+                //ViewBag.Autor = person.Nombre + ", de " + person.Edad + " años";
+                //ViewBag.Hora = person.Hora;
+                ViewBag.Autor = person.Nombre + ", de " + person.Edad + " años";
+                ViewBag.hora = person.Hora;
+                ViewBag.Mensaje = "Mostrando datos...";
+            }
+            return View();
+        }
+        public IActionResult SessionLista(string accion)
+        {
+            if (accion == "almacenar")
+            {
+                List<Persona> personas = new List<Persona>();
+                for (int i = 1; i <= 5; i++)
+                {
+                    Persona person = new Persona();
+                    person.Edad = i;
+                    person.Nombre = "Persona" + i;
+                    person.Hora = DateTime.Now.ToLongTimeString() + " " + i;
+                    personas.Add(person);
+                }
+                HttpContext.Session.SetObject("Lista", personas);
+                ViewBag.Mensaje = "Lista almacenada en Session a las " + DateTime.Now.ToLongTimeString();
+            }
+            else if (accion == "mostrar")
+            {
+                //List<Persona> personas = HelperToolkit.DeserializeJSONObject(HttpContext.Session.GetString("Lista"), typeof(List<Persona>)) as List<Persona>;
+                //var personas = HelperToolkit.DeserializeJSONObject<List<Persona>>(HttpContext.Session.GetString("Lista"));
+                ViewBag.Mensaje = "Mostrando datos...";
+                return View(HttpContext.Session.GetObject<List<Persona>>("Lista"));
+            }
+            return View();
+        }
+
     }
 }

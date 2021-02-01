@@ -14,7 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="~/css/jumbotron.css" rel="stylesheet" />
-    @RenderSection("styles",false)
+    @RenderSection("styles", false)
 </head>
 
 <body>
@@ -45,6 +45,12 @@
                 <li class="nav-item">
                     @Html.ActionLink("Usuarios", "Index", "Usuarios", null, new { @class = "nav-link text-light" })
                 </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Session Storage", "EjemploSession", "Home", null, new { @class = "nav-link text-light" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Session Personas", "SessionLista", "Home", null, new { @class = "nav-link text-light" })
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ejemplos</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -71,7 +77,7 @@
         </div>
 
         <div class="container">
-            
+
             <hr>
 
         </div> <!-- /container -->
