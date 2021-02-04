@@ -1,0 +1,31 @@
+﻿@model List<Empleado>
+@{
+    ViewData["Title"] = "MostrarEmpleados";
+    List<int> sessionemp = Context.Session.GetObject<List<int>>("EMPLEADOS") as List<int>;
+
+}
+
+<h1>Mostrar Empleados</h1>
+<a asp-controller="EmpleadosSession" asp-action="AlmacenarEmpleados" class="btn btn-dark m-1">Volver a Almacenar Empleados</a>
+@if (Model == null)
+{
+    <h2 class="text-danger"> No existen empleados en Session</h2>
+}
+else
+{
+    <form method="post">
+        <button type="submit" class=" btn btn-primary m-1">Realizar pedido</button>
+        <ul class="list-group">
+            @foreach (Empleado emp in Model)
+            {
+                <li class="list-group-item">
+                    @emp.Apellido
+                    <a asp-action="MostrarEmpleados"
+                       asp-controller="EmpleadosSession"
+                       asp-route-eliminar="@emp.IdEmpleado">Eliminar de la Session</a>
+                    <input type="number" value="@sessionemp.Where(x => x == emp.IdEmpleado).Count()" name="cantidades" class="float-right" readonly/>
+                </li>
+            }
+        </ul>
+    </form>
+}

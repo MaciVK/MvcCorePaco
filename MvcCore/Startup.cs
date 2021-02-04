@@ -27,6 +27,8 @@ namespace MvcCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCaching();
+            services.AddMemoryCache();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
@@ -48,7 +50,7 @@ namespace MvcCore
             services.AddTransient<RepositoryUsuarios>();
             //SQL SERVER
             services.AddTransient<IRepositoryHospital, RepositoryHospital>();
-            services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQL));
+            services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQLClase));
             //ORACLE DB
             //services.AddTransient<IRepositoryDepartamentos>(x => new RepositoryDepartamentosOracle(cadenaOracle));
             //MYSQL CON POMELO
@@ -68,7 +70,7 @@ namespace MvcCore
             }
 
             app.UseRouting();
-
+            app.UseResponseCaching();
             app.UseStaticFiles();
             app.UseSession();
 

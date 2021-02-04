@@ -81,6 +81,16 @@ namespace MvcCorePaco.Repositories
 
         }
 
+        public List<Empleado> GetEmpleadosSession(List<int> idempleados)
+        {
+            var consulta = from datos in this.context.Empleados
+                           where idempleados.Contains(datos.IdEmpleado)
+                           select datos;
+            return consulta.OrderBy(x=>x.IdEmpleado).ToList();
+
+
+        }
+
         #endregion
     }
 }
