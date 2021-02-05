@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "HoraSistemaDistribuida";
+}
+
+<h1>HoraSistemaDistribuida</h1>
+
+<a asp-action="HoraSistemaDistribuida" asp-controller="Caching" class="btn btn-dark m-1">Actualizar</a>
+<a asp-action="HoraSistemaDistribuida" asp-controller="Caching" asp-route-dato="1" class="btn btn-dark m-1">Dato1</a>
+<a asp-action="HoraSistemaDistribuida" asp-controller="Caching" asp-route-dato="2" class="btn btn-dark m-1">Dato2</a>
+<h1 class="text-info">@ViewBag.fecha</h1>

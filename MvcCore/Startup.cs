@@ -27,12 +27,13 @@ namespace MvcCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCaching();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(15);
             });
-
+            services.AddMemoryCache();
             String cadenaSQL = Configuration.GetConnectionString("CadenaSqlHospitalCasa");
             string cadenaSQLClase = Configuration.GetConnectionString("CadenaSqlHospitalClase");
             string cadenaOracle = Configuration.GetConnectionString("CadenaOracleDeptCasa");
@@ -49,6 +50,7 @@ namespace MvcCore
             //SQL SERVER
             services.AddTransient<IRepositoryHospital, RepositoryHospital>();
             services.AddDbContext<HospitalContext>(options => options.UseSqlServer(cadenaSQL));
+
             //ORACLE DB
             //services.AddTransient<IRepositoryDepartamentos>(x => new RepositoryDepartamentosOracle(cadenaOracle));
             //MYSQL CON POMELO
@@ -70,6 +72,7 @@ namespace MvcCore
             app.UseRouting();
 
             app.UseStaticFiles();
+            app.UseResponseCaching();
             app.UseSession();
 
             app.UseEndpoints(endpoints =>

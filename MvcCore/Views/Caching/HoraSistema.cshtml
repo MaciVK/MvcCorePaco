@@ -1,0 +1,7 @@
+﻿<h1>Hora Sistema Caching</h1>
+<a asp-action="HoraSistema" asp-controller="Caching" class="btn btn-dark m-1">Reload</a>
+<a asp-action="HoraSistema" asp-controller="Caching" asp-route-tiempo="15" class="btn btn-dark m-1">15 sec</a>
+<a asp-action="HoraSistema" asp-controller="Caching" asp-route-tiempo="30" class="btn btn-dark m-1">30 sec</a>
+<a asp-action="HoraSistema" asp-controller="Caching" asp-route-tiempo="45" class="btn btn-dark m-1">45 sec</a>
+<h2 class="text-primary">@ViewBag.fecha</h2>
+<h2 class="text-warning bg-dark p-2 container">@ViewBag.mensaje</h2>

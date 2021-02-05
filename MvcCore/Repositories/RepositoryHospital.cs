@@ -1,4 +1,5 @@
-﻿using MvcCorePaco.Data;
+﻿using Microsoft.Extensions.Caching.Memory;
+using MvcCorePaco.Data;
 using MvcCorePaco.Models;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,33 @@ namespace MvcCorePaco.Repositories
     public class RepositoryHospital : IRepositoryHospital
     {
         HospitalContext context;
-        public RepositoryHospital(HospitalContext context)
+        IMemoryCache MemoryCache;
+
+        
+
+        public RepositoryHospital(HospitalContext context, IMemoryCache MemoryCache)
         {
             this.context = context;
+            this.MemoryCache = MemoryCache;
         }
         #region TABLA DEPARTAMENTOS
         public List<Departamento> GetDepartamentos()
         {
 
-            var consulta = from departamentos in this.context.Departamentos
-                           select departamentos;
-            return consulta.ToList();
+            List<Departamento> lista;
+            if (this.MemoryCache.Get("DEPARTAMENTOS") == null)
+            {
+                var consulta = from departamentos in this.context.Departamentos
+                               select departamentos;
+                lista = consulta.ToList();
+                this.MemoryCache.Set("DEPARTAMENTOS", lista);
+
+            }
+            else
+            {
+                lista = this.MemoryCache.Get("DEPARTAMENTOS") as List<Departamento>;
+            }
+            return lista;
         }
 
         public Departamento GetDepartamento(int iddepart)
