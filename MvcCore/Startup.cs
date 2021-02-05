@@ -70,7 +70,7 @@ namespace MvcCore
             }
 
             app.UseRouting();
-
+            app.UseResponseCaching();
             app.UseStaticFiles();
             app.UseResponseCaching();
             app.UseSession();
