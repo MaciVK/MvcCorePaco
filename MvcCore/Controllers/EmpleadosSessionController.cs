@@ -35,11 +35,9 @@ namespace MvcCorePaco.Controllers
                 }
                 //if (sessionemp.Contains(idempleado.Value) == false)
                 //{
-                    sessionemp.Add(idempleado.GetValueOrDefault());
-                    HttpContext.Session.SetObject("EMPLEADOS", sessionemp);
+                sessionemp.Add(idempleado.GetValueOrDefault());
+                HttpContext.Session.SetObject("EMPLEADOS", sessionemp);
                 //}
-
-                ViewBag.mensaje = "Datos almacenados: " + sessionemp.Count();
             }
             List<Empleado> empleados = this.repo.GetEmpleados();
             return View(empleados);
@@ -71,7 +69,7 @@ namespace MvcCorePaco.Controllers
             TempData["EMPLEADOS"] = empleados;
             TempData["CANTIDADES"] = cantidades;
             return RedirectToAction("Pedidos");
-        
+
         }
 
         public IActionResult Pedidos()
@@ -83,7 +81,7 @@ namespace MvcCorePaco.Controllers
         //[HttpPost]
         //public IActionResult Pedidos(List<int> cantidades)
         //{
-            
+
         //    ViewBag.cantidades = cantidades; ;
         //    List<int> sessionemp = HttpContext.Session.GetObject<List<int>>("EMPLEADOS");
         //    List<Empleado> empleados = this.repo.GetEmpleadosSession(sessionemp);

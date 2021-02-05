@@ -1,0 +1,12 @@
+﻿@{
+    List<int> empleados = Context.Session.GetObject<List<int>>("EMPLEADOS");
+}
+@if (empleados == null)
+{
+    <h1 class="text-info">Elige empleados!</h1>
+}
+else
+{
+
+    <h1 class="text-primary">@empleados.Count Empleado(s) almacenado(s)</h1>
+}

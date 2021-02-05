@@ -55,6 +55,7 @@
                         @Html.ActionLink("Session Personas", "SessionLista", "Home", null, new { @class = "dropdown-item" })
                         <a asp-action="HoraSistema" asp-controller="Caching" class="dropdown-item">Caching</a>
                         <a asp-action="HoraSistemaDistribuida" asp-controller="Caching" class="dropdown-item">Caching Distribuido</a>
+                        @Html.ActionLink("Almacenar Empleados", "AlmacenarEmpleados", "EmpleadosSession", null, new { @class = "dropdown-item" })
                     </div>
                 </li>
             </ul>
