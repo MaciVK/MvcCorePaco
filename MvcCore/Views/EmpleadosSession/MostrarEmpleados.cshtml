@@ -23,7 +23,7 @@ else
                     <a asp-action="MostrarEmpleados"
                        asp-controller="EmpleadosSession"
                        asp-route-eliminar="@emp.IdEmpleado">Eliminar de la Session</a>
-                    <input type="number" value="@sessionemp.Where(x => x == emp.IdEmpleado).Count()" name="cantidades" class="float-right" readonly/>
+                    <input type="number" value="@sessionemp.Where(x => x == emp.IdEmpleado).Count()" name="cantidades" class=" form-control float-right" readonly />
                 </li>
             }
         </ul>
